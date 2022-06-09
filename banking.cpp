@@ -16,7 +16,7 @@ class Bank{
        void Deposit(int d_dollars, int d_cents){
            int d_amount=d_dollars*100+d_cents;
            int bal= dollars*100+cents;
-           if(d_amount<0 && abs(d_amount)>bal) WithdrawError();
+           if(d_amount<0 && abs(d_amount)>bal) DepError();
            else{
                 bal=bal+d_amount;
                 dollars= bal/100;
@@ -44,6 +44,10 @@ class Bank{
            cout<<dollars<<"D"<<" "<<cents<<"C"<<endl;
        }
 
+       void DepError(){
+           cout<<"You don't have enough balance to perform this action"<<endl;
+       }
+
        void WithdrawError()
        {
            cout<<"You don't have enough balance to withdraw this amount!"<<endl;
@@ -63,8 +67,8 @@ int inputBal()
     for(int i=0;i<val.length();++i)
     {
         if(val[i]=='D') d_dol= stoi(val.substr(0,i));
-        else if(val[i]==' ') s=i;
-        else if(val[i]=='C') d_cen= stoi(val.substr(s+1, i-s));
+        else if(val[i]==' ') s=i+1;
+        else if(val[i]=='C') d_cen= stoi(val.substr(s, i-s));
     }
     return d_dol*100+d_cen;
 }
