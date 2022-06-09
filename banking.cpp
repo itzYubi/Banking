@@ -50,38 +50,39 @@ class Bank{
        }
 };
 
+
+int inputBal()
+{
+    string val="";
+    cout<<"Enter Amount: ";
+    getline(cin, val);
+    getline(cin, val);
+    int s=0;
+    int d_dol=0;
+    int d_cen=0;
+    for(int i=0;i<val.length();++i)
+    {
+        if(val[i]=='D') d_dol= stoi(val.substr(0,i));
+        else if(val[i]==' ') s=i;
+        else if(val[i]=='C') d_cen= stoi(val.substr(s+1, i-s));
+    }
+    return d_dol*100+d_cen;
+}
+
 void BankingPortal(char ch, Bank &bank)
 {
     switch(ch)
         {
             case '1':
             {
-                string deposit_D;
-                string deposit_C;
-                cout<<"Enter Amount:"<<endl;
-                cin>>deposit_D>>deposit_C;
-                string dol="", cen="";
-                int d_dollars=0, d_cents=0;
-                dol=deposit_D.substr(0,deposit_D.length()-1);
-                d_dollars=stoi(dol);
-                cen=deposit_C.substr(0,deposit_C.length()-1);
-                d_cents=stoi(cen);
-                bank.Deposit(d_dollars+d_cents/100, d_cents%100);
+                int dep = inputBal();
+                bank.Deposit(dep/100, dep%100);
                 break;
             }
             case '2':
             {
-                string withdraw_D;
-                string withdraw_C;
-                cout<<"Enter Amount:"<<endl;
-                cin>>withdraw_D>>withdraw_C;
-                string dol="", cen="";
-                int w_dollars=0, w_cents=0;
-                dol=withdraw_D.substr(0,withdraw_D.length()-1);
-                w_dollars=stoi(dol);
-                cen=withdraw_C.substr(0,withdraw_C.length()-1);
-                w_cents=stoi(cen);
-                bank.Withdraw(w_dollars+w_cents/100, w_cents%100);
+                int withdraw= inputBal();
+                bank.Withdraw(withdraw/100, withdraw%100);
                 break;
             }
             case '3':
@@ -108,3 +109,4 @@ int main()
     }while(choice!='4');
     return 0;
 }
+
