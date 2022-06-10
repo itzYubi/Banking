@@ -5,8 +5,8 @@ using namespace std;
 //Description: class Bank that performs all basic operation of a bank.
 class Bank{
     public:
-       int dollars;
-       int cents;
+       long long dollars;
+       long long cents;
 
     public:
         // Constructor
@@ -15,9 +15,9 @@ class Bank{
             cents=0;
         }
 
-       void Deposit(int d_dollars, int d_cents){
-           int d_amount=d_dollars*100+d_cents;
-           int bal= dollars*100+cents;
+       void Deposit(long long d_dollars, long long d_cents){
+           long long d_amount=d_dollars*100+d_cents;
+           long long bal= dollars*100+cents;
            if(d_amount<0 && abs(d_amount)>bal) DepError();
            else{
                 bal=bal+d_amount;
@@ -27,9 +27,9 @@ class Bank{
            }
        }  
 
-       void Withdraw(int w_dollars, int w_cents){
-           int w_amount=w_dollars*100+w_cents;
-           int bal= dollars*100+cents;
+       void Withdraw(long long w_dollars, long long w_cents){
+           long long w_amount=w_dollars*100+w_cents;
+           long long bal= dollars*100+cents;
            if(w_amount>bal)
            {
                WithdrawError();
@@ -59,16 +59,16 @@ class Bank{
 };
 
 //Description: for taking and processing the input.
-int inputBal()
+long long inputBal()
 {
     string val="";
     cout<<"Enter Amount: ";
     getline(cin, val);
     getline(cin, val);
-    int s=0;
-    int d_dol=0;
-    int d_cen=0;
-    for(int i=0;i<val.length();++i)
+    long long s=0;
+    long long d_dol=0;
+    long long d_cen=0;
+    for(long long i=0;i<val.length();++i)
     {
         if(val[i]=='D') d_dol= stoi(val.substr(0,i));
         else if(val[i]==' ') s=i+1;
@@ -77,20 +77,20 @@ int inputBal()
     return d_dol*100+d_cen;
 }
 
-//Description: Menu Driven approach for user interface
+//Description: Menu Driven approach for user long longerface
 void BankingPortal(char ch, Bank &bank)
 {
     switch(ch)
         {
             case '1':
             {
-                int dep = inputBal();
+                long long dep = inputBal();
                 bank.Deposit(dep/100, dep%100);
                 break;
             }
             case '2':
             {
-                int withdraw= inputBal();
+                long long withdraw= inputBal();
                 bank.Withdraw(withdraw/100, withdraw%100);
                 break;
             }
@@ -101,7 +101,7 @@ void BankingPortal(char ch, Bank &bank)
                 cout<<"Thank you!";
                 break;    
             default:
-                cout<<"Invalid Input!";
+                cout<<"Invalid Input!"<<endl;
                 break;
         }
 }
