@@ -2,12 +2,14 @@
 #include<string>
 using namespace std;
 
+//Description: class Bank that performs all basic operation of a bank.
 class Bank{
     public:
        int dollars;
        int cents;
 
     public:
+        // Constructor
         Bank(){
             dollars=0;
             cents=0;
@@ -44,6 +46,8 @@ class Bank{
            cout<<dollars<<"D"<<" "<<cents<<"C"<<endl;
        }
 
+       //---------------------------------------------------------------------------------------
+       // ERROR HANDLING
        void DepError(){
            cout<<"You don't have enough balance to perform this action"<<endl;
        }
@@ -54,7 +58,7 @@ class Bank{
        }
 };
 
-
+//Description: for taking and processing the input.
 int inputBal()
 {
     string val="";
@@ -73,6 +77,7 @@ int inputBal()
     return d_dol*100+d_cen;
 }
 
+//Description: Menu Driven approach for user interface
 void BankingPortal(char ch, Bank &bank)
 {
     switch(ch)
@@ -93,10 +98,10 @@ void BankingPortal(char ch, Bank &bank)
                 bank.CheckBalance();
                 break;    
             case '4':
-                cout<<"Thank you";
+                cout<<"Thank you!";
                 break;    
             default:
-                cout<<"Invalid Input";
+                cout<<"Invalid Input!";
                 break;
         }
 }
@@ -104,7 +109,7 @@ void BankingPortal(char ch, Bank &bank)
 int main()
 {
     char choice;
-    Bank bank;
+    Bank bank; // Creating object of Bank class, runs the constructor Bank()
     do{
         cout<<"Select a banking option:"<<endl;
         cout<<"1. Credit \n2. Debit \n3. Check Balance \n4. Quit"<<endl;
